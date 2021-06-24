@@ -58,12 +58,11 @@ class Node():
         self.parent=parent
     
 class BestFirstSearch():
-    def __init__(self,startState,goalState,createChildren,heuristic,compare):
+    def __init__(self,startState,goalState,createChildren,heuristic):
         self.startState=Node(startState)
         self.goalState=Node(goalState)
         self.createChildren=createChildren
         self.heuristic=heuristic
-        self.compare=compare
         self.open=MinHeap()
         self.closed=[]
         self.pathFound=False
@@ -97,6 +96,13 @@ class BestFirstSearch():
             path.append(current.value)
             current=current.parent
         path.reverse()
+        print("Start=>")
+        print(current.value)
+        print("---------------------------------------")
+        no=1
         for i in path:
-            print(i,end="\n\n")
+            print("Step",no,":")
+            print(i)
+            print("---------------------------------------")
+            no+=1
 

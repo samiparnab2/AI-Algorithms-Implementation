@@ -32,13 +32,11 @@ if __name__=="__main__":
     def heuristic(state1,state2):
         return np.sum((state2-state1)!=0)
 
-    def compare(state1,state2):
-        return np.sum(state1-state2)
-
+    
     # start=np.arange(0,9).reshape(3,3)
     start=np.array([[0,1,3],[4,2,5],[7,8,6]])
     goal=np.array([[1,2,3],[4,5,6],[7,8,0]])
-    b=bfs.BestFirstSearch(start,goal,createChildren,heuristic,compare)
+    b=bfs.BestFirstSearch(start,goal,createChildren,heuristic)
     b.search()
     b.printPath()
 
