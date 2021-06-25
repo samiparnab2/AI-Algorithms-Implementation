@@ -1,4 +1,4 @@
-import BestFirstSearch as bfs
+import HillClimbing as hc
 import numpy as np
 
 if __name__=="__main__":
@@ -37,9 +37,9 @@ if __name__=="__main__":
     # np.random.shuffle(start)
     # start=start.reshape(3,3)
     # print(start)
-    # start=np.array([[0,1,3],[4,2,5],[7,8,6]])
-    start=np.array([[1,0,2],[4,6,7],[8,5,3]])
+    start=np.array([[0,1,3],[4,2,5],[7,8,6]])
+    # start=np.array([[1,0,2],[4,6,7],[8,5,3]])
     goal=np.array([[1,2,3],[4,5,6],[7,8,0]])
-    b=bfs.BestFirstSearch(start,goal,createChildren,heuristic)
+    b=hc.HillClimb(start,goal,createChildren,heuristic)
     b.search()
     b.printPath()
