@@ -1,4 +1,5 @@
-import MinMax as mm
+from os import stat
+import MiniMax as mm
 import copy
 
 
@@ -15,6 +16,8 @@ def whoseMove(state):
 
 
 def createChildren(state):
+    if isGameOver(state)!=-1:
+        return []
     player=whoseMove(state)
     children=[]
     tmp=copy.deepcopy(state)
@@ -62,10 +65,13 @@ def isGameOver(state):
                 return x
     for x in range(1,3):
         for i in range(len(state[0])):
-            if state[:][i].count(x)==3:
+            if state[0][i]==state[1][i]==state[2][i]==x:
                 return x
     for x in range(1,3):
-        if state[0][0]==x and state[1][1]==x and state[2][2]==x:
+        if state[0][0]==state[1][1]==state[2][2]==x:
+            return x
+    for x in range(1,3):
+        if state[0][2]==state[1][1]==state[2][0]==x:
             return x
     
     cnt0=0
@@ -96,7 +102,7 @@ if choice==1:
     while newstate==None:
         move=int(input("wrong input try again: "))
         newstate=changeState(currentState,move)
-    currentState=newstate
+    currentState=copy.deepcopy(newstate)
 
 
 elif choice==2:
@@ -106,10 +112,7 @@ minimaxbrain=mm.MiniMax(currentState,createChildren,maxProfit)
 minimaxbrain.buildTree()
 minimaxbrain.estimateProfit()
 # minimaxbrain.show()
-print(currentState)
 currentState=minimaxbrain.play(currentState)
-print(currentState)
-print("isgameover=",isGameOver(currentState),currentState)
 while isGameOver(currentState)==-1:
     printPlay(currentState)
     move=int(input())
@@ -117,10 +120,10 @@ while isGameOver(currentState)==-1:
     while newstate==None:
         move=int(input("wrong input try again: "))
         newstate=changeState(currentState,move)
-    currentState=newstate
+    currentState=copy.deepcopy(newstate)
     if isGameOver(currentState)==playermin:
         printPlay(currentState)
-        print("GAME OVER...TOU WON!")
+        print("GAME OVER...YOU WON!")
         break
     currentState=minimaxbrain.play(currentState)
     if isGameOver(currentState)==playermax:
