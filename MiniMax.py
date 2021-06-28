@@ -58,3 +58,4 @@ class MiniMax():
     def show(self):
         for i in self.queue:
             print(i.value)
+ 
